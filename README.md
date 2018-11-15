@@ -1,3 +1,3 @@
 # Data Repository
 
-To store the original data safely
+To store the original data (after importing) safely
