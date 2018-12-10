@@ -25,8 +25,6 @@ def calculate_all_shortest_path(G, target_index):
         p.join()
         
     return result
-
-
         
 
 def calculate_shortest_path(core_number, graph, node_range, target_index, output):

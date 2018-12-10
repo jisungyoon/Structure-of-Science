@@ -4,7 +4,7 @@ import igraph as ig
 import pandas as pd
 
 
-def reduction_function(G, lamda=1/2):
+def calculate_impact_values(G, lamda=1/2):
     in_list = G.get_adjlist(mode='IN')
     degree_in = np.array(G.degree(mode='IN'))
     out_list = G.get_adjlist(mode='OUT')
