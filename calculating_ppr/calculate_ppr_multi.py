@@ -48,8 +48,8 @@ def normalize(d, target=1.0):
 
 def normalize_and_convert_to_dict(csr_matrix):
     dummy_dict = csr_matrix.todok()
-    dummy_dict = normalize(dummy_dict)
-    return {k[1]:v for k,v in dummy_dict.items() if v>0}
+    dummy_dict = normalize({k[1]:v for k,v in dummy_dict.items() if v>0.0001})
+    return dummy_dict
     
     
 
@@ -95,13 +95,14 @@ if __name__ == '__main__':
     result = {}
     for output in outputs:
         result.update(output.get())
-    print('output_queue_closed')
-    
+    pickle.dump(result, open('ppr_result/' + lang_code + 'wiki_ppr.pkl', 'wb'))
+        
     for output in outputs:
         output.close()
+    print('output_queue_closed')    
         
-    print('process_closed')
     for p in procs:
         p.join()
     
-    pickle.dump(result, open('ppr_result/' + lang_code + 'wiki_ppr.pkl+', 'wb'))
+    print('process_closed')
+    
