@@ -3,8 +3,7 @@ import pandas as pd
 from scipy.stats import pearsonr, spearmanr
 from tqdm import tqdm
 
-from common import normalize, get_temp_weights, simulate
-
+from common import get_temp_weights, normalize, simulate
 
 INIT_VEC_FILE = snakemake.input.init_vec
 SIM_FILE = snakemake.input.sim
@@ -19,7 +18,6 @@ OUTPUT_FILE = snakemake.output.simul_result
 init_vec = np.load(INIT_VEC_FILE)
 sim = np.load(SIM_FILE)
 emperical_weight = np.load(WEIGHT_FILE)
-
 
 
 results = []

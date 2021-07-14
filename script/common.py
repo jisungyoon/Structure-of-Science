@@ -8,6 +8,7 @@ def normalize(mtx):
     new_mtx = mtx / row_sums[:, np.newaxis]
     return new_mtx
 
+
 def get_temp_weights(weight_mtx):
     temp_weights = np.zeros_like(weight_mtx)
     for i, row in enumerate(weight_mtx):
