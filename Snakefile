@@ -35,6 +35,9 @@ SIMPLE_SIMULATION_RESULT_DIR = j(SIMUL_RESULT_DIR, "result", "simple")
 SIMPLE_SIMULATION_RESULT_FILE = j(
     SIMPLE_SIMULATION_RESULT_DIR, "{number},{measure}.npy"
 )
+SIMPLE_SIMULATION_RESULT_FILE_RAND = j(
+    SIMPLE_SIMULATION_RESULT_DIR, "{number},random.npy"
+)
 
 
 ###############################################################################
@@ -63,6 +66,7 @@ rule all:
         expand(WEIGHT_MATRIX_FILES, measure=external_vals),
         PROCESSED_SIM_FILE,
         expand(SIMPLE_SIMULATION_RESULT_FILE, number=range(number_of_sample), measure=external_vals),
+        expand(SIMPLE_SIMULATION_RESULT_FILE_RAND, number=range(number_of_sample)),
 
 
 rule make_init_vectors:
@@ -106,3 +110,17 @@ rule simulation:
         simul_result=SIMPLE_SIMULATION_RESULT_FILE,
     script:
         "script/simulation.py"
+
+
+
+rule simulation_random:
+    input:
+        init_vec=INIT_VECTORS_FILES,
+        sim=PROCESSED_SIM_FILE,
+    params:
+        lr=lr,
+        repetition=repetition,
+    output:
+        simul_result=SIMPLE_SIMULATION_RESULT_FILE_RAND,
+    script:
+        "script/simulation_random.py"
